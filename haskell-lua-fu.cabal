@@ -1,0 +1,19 @@
+cabal-version:      3.4
+name:               haskell-lua-fu
+version:            0.1.0.0
+license:            MIT
+license-file:       LICENSE
+author:             Johannes Maier
+maintainer:         johannes.maier@mailbox.org
+build-type:         Simple
+
+common warnings
+    ghc-options:      -Wall
+
+executable haskell-lua-fu
+    import:           warnings
+    main-is:          Main.hs
+    build-depends:    base
+                    , hslua
+    hs-source-dirs:   src-exe
+    default-language: Haskell2010
