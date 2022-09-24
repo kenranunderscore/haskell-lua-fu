@@ -1,5 +1,21 @@
 {
   "nodes": {
+    "haskell-sdl2": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1662149093,
+        "narHash": "sha256-KkiHPYGF8pMwal/0F/5leoqJOv0TKv6+2acvdkWwHAU=",
+        "owner": "haskell-game",
+        "repo": "sdl2",
+        "rev": "61d03ba9d1d1723c363bbf7dffe163d68cd09ed2",
+        "type": "github"
+      },
+      "original": {
+        "owner": "haskell-game",
+        "repo": "sdl2",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1663905476,
@@ -16,6 +32,7 @@
     },
     "root": {
       "inputs": {
+        "haskell-sdl2": "haskell-sdl2",
         "nixpkgs": "nixpkgs"
       }
     }

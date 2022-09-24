@@ -1,7 +1,12 @@
 {
   description = "Trying out using Lua with Haskell";
 
-  outputs = { self, nixpkgs }:
+  inputs.haskell-sdl2 = {
+    url = "github:haskell-game/sdl2";
+    flake = false;
+  };
+
+  outputs = { self, nixpkgs, ... }@inputs:
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs {
@@ -12,8 +17,12 @@
               overrides =
                 final.lib.composeExtensions (old.overrides or (_: _: { }))
                 (hfinal: hprev: {
-                  # jailbreak because of bytestring 0.11
-                  sdl2 = final.haskell.lib.compose.doJailbreak hprev.sdl2;
+                  # need to use a recent version of sdl2, or we're
+                  # running into bugs
+                  sdl2 = final.haskell.lib.compose.overrideSrc {
+                    src = inputs.haskell-sdl2;
+                    version = "2.5.4.0";
+                  } hprev.sdl2;
                 });
             });
           })
