@@ -11,9 +11,11 @@ common warnings
     ghc-options:      -Wall
 
 executable haskell-lua-fu
-    import:           warnings
-    main-is:          Main.hs
-    build-depends:    base
-                    , hslua
-    hs-source-dirs:   src-exe
-    default-language: Haskell2010
+    import:             warnings
+    main-is:            Main.hs
+    build-depends:      base
+                      , hslua
+                      , hslua-core
+                      , sdl2
+    hs-source-dirs:     src-exe
+    default-language:   GHC2021

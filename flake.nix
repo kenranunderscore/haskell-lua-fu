@@ -4,7 +4,21 @@
   outputs = { self, nixpkgs }:
     let
       system = "x86_64-linux";
-      pkgs = nixpkgs.legacyPackages.${system};
+      pkgs = import nixpkgs {
+        inherit system;
+        overlays = [
+          (final: prev: {
+            haskellPackages = prev.haskell.packages.ghc92.override (old: {
+              overrides =
+                final.lib.composeExtensions (old.overrides or (_: _: { }))
+                (hfinal: hprev: {
+                  # jailbreak because of bytestring 0.11
+                  sdl2 = final.haskell.lib.compose.doJailbreak hprev.sdl2;
+                });
+            });
+          })
+        ];
+      };
     in {
       devShells.${system}.default = pkgs.haskellPackages.shellFor {
         packages = _:
